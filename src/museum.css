@@ -135,3 +135,28 @@
 @media(max-width:1024px){.gate-entrance{min-height:calc(100svh - 84px)}}
 @media(min-width:1025px){.gate-entrance{min-height:calc(100svh - 86px)}}
 @media(prefers-reduced-motion:reduce){.gate-doorway:before,.gate-doorway:after{opacity:0;animation:none}.gate-stage{transition:none}.gate-leaf{transition:none;transform:rotateY(76deg)}.gate:hover .gate-leaf,.gate:focus-visible .gate-leaf{transform:rotateY(76deg)}.gate-carpet{transition:none;transform:translateX(-50%) scaleY(1)}.gate-poem p{opacity:1;transform:none;transition:none}.gate-hint{display:none}}
+
+/* Phone gallery: one readable exhibit, with a glimpse of its neighbours. */
+@media(max-width:640px){
+  .museum-header{margin-inline:18px;gap:10px}
+  .identity span{display:none}
+  .header-contact{min-height:40px;padding-inline:10px}
+  .exhibition{min-height:0}
+  .exhibition-heading{padding:20px 18px 0}
+  .gallery-stage{flex:none;height:clamp(340px,62svh,530px);min-height:0}
+  .panels{perspective:none;transform-style:flat}
+  .exhibit-panel{left:50%;top:50%;width:min(72vw,330px,65cqh);height:auto;max-width:none;transform:translate(calc(-50% + var(--distance)*112%),-50%) scale(calc(1 - var(--depth)*.08));transform-style:flat}
+  .exhibit-panel[data-depth]:not([data-depth="0"]):not([data-depth="1"]){visibility:hidden;pointer-events:none!important}
+  .exhibit-panel:not(.is-current){opacity:.38!important}
+  .glass-heading strong{font-size:clamp(17px,5.5vw,25px)}
+  .glass-english,.glass-category{font-size:clamp(10px,2.8vw,13px)}
+  .gallery-floor,.gallery-horizon,.panel-reflection{display:none}
+  .exhibition-toolbar{margin:0 18px;padding:12px 0 6px;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px}
+  .exhibition-toolbar .gallery-progress{grid-column:1/-1;grid-row:2;justify-content:center}
+  .exhibition-toolbar .gallery-progress button{width:24px;padding:0 4px;min-height:32px}
+  .toolbar-project .project-label h2{font-size:17px}
+  .toolbar-project .project-label>p{font-size:10px}
+  .toolbar-index{font-size:12px;min-height:44px}
+  .salon-stage{height:clamp(400px,65svh,560px);min-height:0}
+  .salon-controls{flex-wrap:wrap}
+}
