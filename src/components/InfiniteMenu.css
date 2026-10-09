@@ -1,0 +1,69 @@
+/* Note: this CSS is only an example, you can overlay whatever you want using the activeItem logic */
+
+#infinite-grid-menu-canvas {
+  cursor: grab;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  outline: none;
+  border-radius: 2px;
+}
+
+#infinite-grid-menu-canvas:focus-visible {
+  outline: 2px solid #f1efe9;
+  outline-offset: -6px;
+}
+
+#infinite-grid-menu-canvas:active {
+  cursor: grabbing;
+}
+
+.action-button {
+  position: absolute;
+  left: 50%;
+  z-index: 10;
+  width: 60px;
+  height: 60px;
+  display: grid;
+  place-items: center;
+  background: #aebdd0;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  border: 5px solid var(--infinite-menu-background, #000);
+}
+
+.action-button-icon {
+  user-select: none;
+  position: relative;
+  color: #101318;
+  top: 2px;
+  font-size: 26px;
+}
+
+.action-button {
+  position: absolute;
+  left: 50%;
+}
+
+.action-button.active {
+  bottom: 3.8em;
+  transform: translateX(-50%) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+  transition: 0.5s ease;
+}
+
+.action-button.inactive {
+  bottom: -80px;
+  transform: translateX(-50%) scale(0);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.1s ease;
+}
+
+@media (max-width: 820px) {
+  .action-button { width: 52px; height: 52px; border-width: 4px; }
+  .action-button.active { bottom: 1.5rem; }
+}

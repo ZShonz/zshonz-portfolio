@@ -1,0 +1,10 @@
+.film-entrance{height:calc(100svh - 86px);min-height:400px;position:relative;display:flex;align-items:center;justify-content:center;padding:32px 5vw 90px;overflow:hidden;touch-action:pan-x;opacity:1;transition:opacity .3s ease}
+.entrance-film{display:block;width:min(66vh,65vw,680px);height:min(66vh,65vw,680px);object-fit:cover;border-radius:20px}
+.film-entry-bar{position:absolute;bottom:32px;left:4vw;right:4vw;display:flex;justify-content:space-between;align-items:center;gap:20px;font-size:clamp(11px,.9vw,15px);letter-spacing:.06em;color:var(--muted)}
+.film-entry-bar a{display:flex;align-items:center;min-height:44px;color:var(--ink)}
+.film-progress{position:absolute;bottom:20px;left:4vw;right:4vw;height:1px;background:var(--line)}
+.film-progress span{display:block;height:100%;background:var(--ink);transform:scaleX(0);transform-origin:left}
+.film-entrance.is-entering{opacity:0}
+@media(max-width:1024px){.film-entrance{height:calc(100svh - 84px)}}
+@media(max-width:640px){.film-entrance{height:calc(100svh - 75px);padding:25px 6vw 100px;min-height:360px}.entrance-film{width:min(88vw,60svh);height:min(88vw,60svh)}.film-entry-bar,.film-progress{left:6vw;right:6vw}}
+@media(prefers-reduced-motion:reduce){.film-entrance{transition:none}}

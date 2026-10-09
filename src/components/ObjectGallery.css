@@ -1,0 +1,29 @@
+.object-salon{margin:0 20px 24px;color:var(--ink)}
+.salon-heading{margin:0 -20px;min-height:50px}
+.salon-stage{position:relative;height:clamp(480px,73vh,760px);overflow:hidden;perspective:1200px;isolation:isolate;touch-action:pan-y}
+.salon-frame{position:absolute;left:50%;top:5%;width:clamp(250px,27vw,390px);height:86%;transform:translateX(-50%);border:1px solid #aeb7b788;box-sizing:border-box;pointer-events:none;z-index:6}
+.salon-bay{position:absolute;left:50%;top:5%;width:clamp(250px,27vw,390px);height:86%;padding:0;border:1px solid transparent;background:transparent;transform:translateX(calc(-50% + var(--distance)*106%)) translateZ(calc(var(--depth)*-160px)) rotateY(var(--turn));transform-origin:center;transition:transform .6s cubic-bezier(.22,.68,.12,1);text-align:left;display:block;box-sizing:border-box;cursor:pointer;pointer-events:none}
+
+
+.salon-lamp{position:absolute;top:5%;left:50%;width:24px;height:6px;transform:translateX(-50%);border:1px solid #727b7b;background:#252a2a}
+.salon-frame .salon-lamp{background:#efffff;border-color:#e8ffff;box-shadow:0 4px 18px #dfffff55}
+.salon-frame:before{content:'';position:absolute;top:7%;left:17%;right:17%;height:50%;background:linear-gradient(#dfffff12,transparent);clip-path:polygon(47% 0,53% 0,100% 100%,0 100%);opacity:1;pointer-events:none}
+
+.salon-exhibit{position:absolute;left:15%;right:15%;top:27%;height:40%;display:block;pointer-events:auto}
+.salon-vitrine{position:absolute;left:15%;right:15%;top:27%;height:40%;display:block;border:1px solid #dce9e951;box-sizing:border-box;background:linear-gradient(112deg,transparent 8%,#efffff09 9%,#efffff03 24%,transparent 25%,transparent 65%,#efffff06 66%,transparent 83%),linear-gradient(180deg,#eaffff08,transparent 24%,transparent 80%,#d9eeee07);box-shadow:inset 2px 0 0 #efffff12,inset -3px 0 0 #d9eeee0c,inset 0 2px 0 #ffffff16,0 0 12px #dfffff04;pointer-events:none}
+.salon-vitrine:before{content:'';position:absolute;inset:3px;border:1px solid #cfe4e416;border-top-color:#f0ffff32;border-bottom-color:#eaffff28;pointer-events:none}
+.salon-vitrine:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#edffff14,transparent 5%,transparent 94%,#edffff10),linear-gradient(180deg,#ffffff1a,transparent 3%,transparent 97%,#ffffff14);pointer-events:none}
+.salon-exhibit .model-stage{width:100%;height:100%;filter:grayscale(1) brightness(.65);overflow:hidden}
+.salon-bay.is-active .model-stage{filter:none}
+.salon-plinth{display:block;position:absolute;left:15%;right:15%;top:67%;bottom:0;border:1px solid #89939370;border-top:2px solid #adb6b6;box-sizing:border-box;background:#ffffff02}
+.salon-loading{position:absolute;inset:0;display:grid;place-items:center;font-size:11px}
+.salon-floor{position:absolute;left:0;right:0;bottom:0;height:9%;border-top:1px solid #7b858533;background:linear-gradient(transparent,#ffffff02);z-index:-1}
+.salon-controls{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:18px 16px;border-top:1px solid var(--line)}
+.salon-controls>div:first-child{display:flex;align-items:center;gap:24px}
+.salon-controls strong{font-size:16px;font-weight:400}
+.salon-controls>div>span{font-size:11px;color:var(--muted)}
+@media(max-width:760px){.object-salon{margin:0 12px 20px}.salon-heading{margin-inline:-12px}.salon-stage{height:65svh;min-height:440px;perspective:800px}.salon-bay,.salon-frame{width:62vw;max-width:320px}.salon-controls{padding:16px 0}.salon-controls>div:first-child{gap:12px}}
+@media(prefers-reduced-motion:reduce){.salon-bay{transition:none}}
+
+
+
