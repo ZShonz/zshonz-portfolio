@@ -24,10 +24,11 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - uses: actions/configure-pages@v5
+        id: pages
       - run: npm run build
         env:
-          VITE_BASE_PATH: /${{ github.event.repository.name }}/
-      - uses: actions/configure-pages@v5
+          VITE_BASE_PATH: ${{ steps.pages.outputs.base_path }}/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
