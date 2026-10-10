@@ -8,3 +8,6 @@
 @media(max-width:1024px){.film-entrance{height:calc(100svh - 84px)}}
 @media(max-width:640px){.film-entrance{height:calc(100svh - 75px);padding:25px 6vw 100px;min-height:360px}.entrance-film{width:min(88vw,60svh);height:min(88vw,60svh)}.film-entry-bar,.film-progress{left:6vw;right:6vw}}
 @media(prefers-reduced-motion:reduce){.film-entrance{transition:none}}
+
+.film-touch-hint{display:none}
+@media(pointer:coarse){.film-mouse-hint{display:none}.film-touch-hint{display:inline}}

@@ -43,7 +43,7 @@ export default function Entrance() {
     const start = event => { touchY = event.touches[0]?.clientY ?? null; };
     const touch = event => {
       const next = event.touches[0]?.clientY;
-      if (touchY !== null && next !== undefined) { event.preventDefault(); move((touchY - next) * 3); }
+      if (touchY !== null && next !== undefined) { event.preventDefault(); move((next - touchY) * 3); }
       touchY = next ?? null;
     };
     root.addEventListener('wheel', wheel, { passive: false });
@@ -58,7 +58,7 @@ export default function Entrance() {
   }, []);
   return <section ref={stage} className="film-entrance" aria-label="滚动旋转器皿，进入展厅">
     <video ref={video} className="entrance-film" src={`${import.meta.env.BASE_URL}assets/designer-rotation-${window.matchMedia('(max-width: 640px)').matches ? '640' : '960'}.mp4`} poster={`${import.meta.env.BASE_URL}assets/designer-avatar.jpg`} muted playsInline preload="auto" aria-label="器皿旋转展示" />
-    <div className="film-entry-bar"><span>向下滚动，旋转入场</span><a href="#work">进入展厅 ↗</a></div>
+    <div className="film-entry-bar"><span><span className="film-mouse-hint">向下滚动</span><span className="film-touch-hint">向下滑动</span>，旋转入场</span><a href="#work">进入展厅 ↗</a></div>
     <div className="film-progress" aria-hidden="true"><span ref={progress} /></div>
   </section>;
 }
