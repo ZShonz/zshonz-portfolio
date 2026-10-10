@@ -44,5 +44,5 @@ export default function ScrollPortrait() {
       window.removeEventListener('touchmove', touch);
     };
   }, []);
-  return <video ref={video} className="designer-avatar" src={`${import.meta.env.BASE_URL}assets/designer-rotation.mp4`} poster={`${import.meta.env.BASE_URL}assets/designer-avatar.jpg`} muted playsInline preload="auto" aria-label="随滚动旋转的器皿头像" />;
+  return <video ref={video} className="designer-avatar" src={`${import.meta.env.BASE_URL}assets/designer-rotation-${window.matchMedia('(max-width: 640px)').matches ? '640' : '960'}.mp4`} poster={`${import.meta.env.BASE_URL}assets/designer-avatar.jpg`} muted playsInline preload="auto" aria-label="随滚动旋转的器皿头像" />;
 }
