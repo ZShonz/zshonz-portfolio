@@ -11,10 +11,16 @@ export default function ModelStage({
   rotation = [0, 0, 0],
   speed = 0.22,
   sway = 0,
-  cameraZ = 3.4
+  cameraZ = 3.4,
+  active = true,
+  onReady
 }) {
   const hostRef = useRef(null);
   const [status, setStatus] = useState('loading');
+  const activeRef = useRef(active);
+  const readyRef = useRef(onReady);
+  activeRef.current = active;
+  readyRef.current = onReady;
   const [rotX, rotY, rotZ] = rotation;
 
   useEffect(() => {
@@ -24,6 +30,7 @@ export default function ModelStage({
     let frame;
     let alive = true;
     let model;
+    let dirty = true;
     setStatus('loading');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const scene = new THREE.Scene();
@@ -37,7 +44,8 @@ export default function ModelStage({
       setStatus('error');
       return undefined;
     }
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
+    const mobile = window.matchMedia('(max-width: 760px)').matches;
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, mobile ? 1.25 : 1.75));
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.08;
@@ -92,6 +100,8 @@ export default function ModelStage({
         model.position.copy(center).multiplyScalar(-scale);
         rig.add(model);
         setStatus('ready');
+        dirty = true;
+        readyRef.current?.();
       },
       undefined,
       () => alive && setStatus('error')
@@ -113,6 +123,7 @@ export default function ModelStage({
       renderer.setSize(width, height, false);
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
+      dirty = true;
     };
     const resizeObserver = new ResizeObserver(resize);
     resizeObserver.observe(host);
@@ -123,11 +134,15 @@ export default function ModelStage({
     visibilityObserver.observe(host);
     let previousTime = performance.now();
     let motionTime = 0;
+    let lastDraw = 0;
     const render = () => {
       const now = performance.now();
       const delta = Math.min((now - previousTime) / 1000, 0.05);
       previousTime = now;
       if (!visible || document.hidden) { frame = requestAnimationFrame(render); return; }
+      if ((!activeRef.current && !dirty) || (mobile && now - lastDraw < 1000 / 30)) { frame = requestAnimationFrame(render); return; }
+      lastDraw = now;
+      dirty = false;
       if (model && !reduceMotion) {
         motionTime += delta;
         if (sway) rig.rotation.y = rotY + Math.sin(motionTime * Math.PI / 5) * sway;

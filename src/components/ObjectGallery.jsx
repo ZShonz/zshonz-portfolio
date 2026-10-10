@@ -11,6 +11,7 @@ const exhibits = [
 
 export default function ObjectGallery() {
   const [active, setActive] = useState(0);
+  const [ready, setReady] = useState(() => new Set());
   const stage = useRef(null);
   const gesture = useRef({ sum: 0, last: 0, locked: 0, x: 0, y: 0, dragged: false });
   const choose = i => setActive((i + exhibits.length) % exhibits.length);
@@ -66,9 +67,9 @@ export default function ObjectGallery() {
           tabIndex={d===0?0:-1} aria-label={`${title}，${d===0?'查看案例':'切换到此展品'}`}
           onClick={() => { if(gesture.current.dragged){gesture.current.dragged=false;return;} d===0?open(i):choose(i); }}>
           <span className="salon-exhibit">
-            <Suspense fallback={<span className="salon-loading">展品载入中</span>}>
-              <ModelStage src={`${import.meta.env.BASE_URL}assets/models/${model}.glb`} label={`${title}三维展品`} fit={1.65} rotation={rotation} cameraZ={4.3} speed={0} sway={0.08} />
-            </Suspense>
+            {Math.abs(d) <= 1 && (d === 0 || ready.has(active)) && <Suspense fallback={<span className="salon-loading">展品载入中</span>}>
+              <ModelStage src={`${import.meta.env.BASE_URL}assets/models/${model}-optimized.glb`} label={`${title}三维展品`} fit={1.65} rotation={rotation} cameraZ={4.3} speed={0} sway={0.08} active={d === 0} onReady={() => setReady(previous => previous.has(i) ? previous : new Set([...previous, i]))} />
+            </Suspense>}
           </span>
         </button>;
       })}
