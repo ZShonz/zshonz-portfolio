@@ -1,3 +1,4 @@
+import ResponsiveImage from './ResponsiveImage';
 export const packagingProjects = {
   arhats: { title: '十八罗汉', index: '05', files: Array.from({length: 11}, (_, i) => `${String(i + 1).padStart(2, '0')}.jpg`) },
   fengtai: { title: '丰泰云鼎', index: '04', files: ['01.jpg', '02.jpg'] },
@@ -12,7 +13,7 @@ export default function PackagingDetail({ caseKey = 'richchoc' }) {
   return <article className="case-page" aria-label={`${title}包装设计`}>
     <header className="case-nav"><a href="#objects">← 返回器物展厅</a><span>ZShonz / Objects</span><span>包装设计</span></header>
     <section className="case-overview"><div className="case-overview-info"><p className="case-index">PACKAGE / {index}</p><h1>{title}</h1></div></section>
-    <section className="case-gallery">{files.map(file => <figure className="case-frame" key={file}><img src={asset(file)} alt={`${title}包装设计 ${file}`} loading="lazy" decoding="async" /></figure>)}</section>
+    <section className="case-gallery">{files.map(file => <figure className="case-frame" key={file}><ResponsiveImage src={asset(file)} alt={`${title}包装设计 ${file}`} loading="lazy" decoding="async" /></figure>)}</section>
     <a className="plain-link" href="#objects">返回器物展厅 ↗</a>
   </article>;
 }

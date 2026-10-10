@@ -1,3 +1,4 @@
+import ResponsiveImage from './ResponsiveImage';
 import mossaneeGallery from '../mossanee-gallery.json';
 import jinxiuxiangGallery from '../jinxiuxiang-gallery.json';
 import linjilinliGallery from '../linjilinli-gallery.json';
@@ -60,7 +61,7 @@ export default function ProjectDetail({ project, onClose, onNext }) {
       </header>
 
       <section className="case-hero">
-        <img src={project.image} alt={`${project.title}项目封面`} />
+        <ResponsiveImage src={project.image} alt={`${project.title}项目封面`} />
       </section>
 
       <section className="case-overview">
@@ -86,7 +87,7 @@ export default function ProjectDetail({ project, onClose, onNext }) {
       <section className="case-gallery">
         {images.map((image, index) => (
           <figure key={image.src} className={`case-frame case-frame-${index + 1}`}>
-            <img src={image.src} width={image.width} height={image.height} alt={`${project.title}案例展开 ${index + 1}`} loading="lazy" decoding="async" />
+            <ResponsiveImage src={image.src} width={image.width} height={image.height} alt={`${project.title}案例展开 ${index + 1}`} loading="lazy" decoding="async" />
           </figure>
         ))}
       </section>
@@ -95,7 +96,7 @@ export default function ProjectDetail({ project, onClose, onNext }) {
         <h2 id="cultural-title" className="case-section-title">文创设计</h2>
         <div className="case-gallery">
           {culturalImages.map((image, index) => <figure key={image.src} className="case-frame">
-            <img src={image.src} width={image.width} height={image.height} alt={`${project.title}文创设计 ${index + 28}`} loading="lazy" decoding="async" />
+            <ResponsiveImage src={image.src} width={image.width} height={image.height} alt={`${project.title}文创设计 ${index + 28}`} loading="lazy" decoding="async" />
           </figure>)}
         </div>
       </section>}

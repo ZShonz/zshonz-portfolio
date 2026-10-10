@@ -7,3 +7,6 @@ script.js
 *.zip
 .DS_Store
 Thumbs.db
+
+public/assets/responsive/
+src/responsive-images.json

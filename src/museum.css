@@ -160,3 +160,5 @@
   .salon-stage{height:clamp(400px,65svh,560px);min-height:0}
   .salon-controls{flex-wrap:wrap}
 }
+
+.case-hero>img{height:auto}
