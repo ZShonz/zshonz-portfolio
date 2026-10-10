@@ -7,7 +7,7 @@ export default function Exhibition({projects,active,setActive,onOpen,allColor,se
   const [indexOpen,setIndexOpen]=useState(false);
   const choose=index=>setActive((index+projects.length)%projects.length);
   useEffect(()=>{
-    const node=stage.current;
+    const node=stage.current.closest('section');
     const wheel=e=>{
       if(e.ctrlKey || indexOpen) return;
       const g=gesture.current, now=performance.now();
@@ -26,7 +26,7 @@ export default function Exhibition({projects,active,setActive,onOpen,allColor,se
     <div className="gallery-stage" ref={stage} tabIndex={0} aria-label="作品展板。滚动或按左右方向键切换，回车打开当前作品。"
       onKeyDown={e=>{if(e.target!==e.currentTarget)return;if(['ArrowRight','ArrowDown','ArrowLeft','ArrowUp','Home','End','Enter'].includes(e.key)){e.preventDefault();if(e.key==='Enter')onOpen(projects[active]);else choose(e.key==='Home'?0:e.key==='End'?projects.length-1:active+(['ArrowRight','ArrowDown'].includes(e.key)?1:-1));}}}
       onPointerDown={e=>{gesture.current.startX=e.clientX;gesture.current.startY=e.clientY;gesture.current.dragged=false;}}
-      onPointerUp={e=>{const g=gesture.current,dx=e.clientX-g.startX,dy=e.clientY-g.startY;if(e.pointerType==='touch'&&Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)){g.dragged=true;choose(active+(Math.abs(dx)>Math.abs(dy)?(dx<0?1:-1):(dy<0?1:-1)));}}}>
+      onPointerUp={e=>{const g=gesture.current,dx=e.clientX-g.startX,dy=e.clientY-g.startY;if(e.pointerType==='touch'&&Math.max(Math.abs(dx),Math.abs(dy))>40){g.dragged=true;choose(active+(Math.abs(dx)>Math.abs(dy)?(dx<0?1:-1):(dy<0?1:-1)));}}}>
       <div className="gallery-floor" aria-hidden="true"/><div className="gallery-horizon" aria-hidden="true"/>
       <div className="panels">{projects.map((p,i)=>{const raw=(i-active+projects.length)%projects.length,d=raw>projects.length/2?raw-projects.length:raw,v=Math.abs(d)<=3;return <button key={p.title} className={`exhibit-panel ${p.glass ? 'is-glass' : ''} ${d===0?'is-current':''}`} data-depth={Math.abs(d)} tabIndex={d===0?0:-1} aria-hidden={!v} aria-label={`${p.title}，${d===0?'查看案例':'切换到此作品'}`} style={{zIndex:10-Math.abs(d),'--distance':d,'--depth':Math.abs(d),'--turn':d===0?0:d>0?-24:24,opacity:v?1:0,pointerEvents:v?'auto':'none'}} onPointerUp={e=>{const g=gesture.current;if(e.pointerType==='touch'&&Math.hypot(e.clientX-g.startX,e.clientY-g.startY)<10){g.dragged=true;e.preventDefault();d===0?onOpen(p):choose(i);}}} onClick={()=>{if(gesture.current.dragged){gesture.current.dragged=false;return;}d===0?onOpen(p):choose(i);}}>{p.glass ? <GlassCover project={p} active={d===0} /> : <div className="panel-picture"><ResponsiveImage src={p.cover||p.image} alt={`${p.title}品牌视觉`} draggable="false" sizes="(max-width: 640px) 72vw, 30vw" loading={d===0?'eager':'lazy'} fetchPriority={d===0?'high':'auto'}/><span className="panel-view">查看案例 ↗</span></div>}<div className="panel-reflection" aria-hidden="true" style={{backgroundImage:p.glass?undefined:`url("${p.cover||p.image}")`}}/></button>;})}</div>
       

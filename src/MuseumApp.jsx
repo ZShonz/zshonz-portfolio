@@ -28,6 +28,11 @@ export default function MuseumApp() {
   const contactDialog = useRef(null);
   const openContact = () => { setMenu(false); contactDialog.current?.showModal(); };
   useEffect(() => {
+    const locked = route.room === 'work' || route.room === 'objects';
+    document.documentElement.classList.toggle('gallery-locked', locked);
+    return () => document.documentElement.classList.remove('gallery-locked');
+  }, [route.room]);
+  useEffect(() => {
     const change = () => { setRoute(readRoute()); setMenu(false); window.scrollTo(0, 0); };
     window.addEventListener('hashchange', change);
     return () => window.removeEventListener('hashchange', change);
@@ -68,7 +73,7 @@ export default function MuseumApp() {
       {route.room === 'contact' && <section className="contact-page page-enter"><p className="eyebrow">LET’S MAKE SOMETHING MEANINGFUL</p><h1>下一件作品，<br />从一次对话开始。</h1><div className="contact-line"><a href="mailto:2731277468@qq.com">2731277468@qq.com</a><button onClick={copyEmail} aria-live="polite">{copied ? '已复制 ✓' : '复制邮箱 ↗'}</button></div><p className="contact-wechat">微信号：ZShonz</p><p className="contact-detail">品牌全案 · 视觉识别 · 包装与空间</p></section>}
       {route.room === 'project' && <ProjectDetail key={route.project.index} project={{...route.project,nextTitle:projects[route.project.index % projects.length].title}} onClose={() => {window.location.hash='work';}} onNext={() => openProject(projects[route.project.index % projects.length])} />}
     </main>
-    {route.room !== 'home' && <SiteFooter onContact={openContact} />}
+    {!['home', 'work', 'objects'].includes(route.room) && <SiteFooter onContact={openContact} />}
     <dialog ref={contactDialog} aria-label="联系设计师" className="contact-dialog" onClick={e => { if (e.target === e.currentTarget) e.currentTarget.close(); }}>
       <div className="contact-dialog-content"><div className="contact-dialog-top"><p className="eyebrow">CONTACT / 联系</p><button autoFocus onClick={() => contactDialog.current.close()} aria-label="关闭联系面板">关闭 ×</button></div><h2>从一次对话开始。</h2><p className="dialog-intro">关于品牌、包装，或一个还在酝酿的想法。</p><a className="dialog-email" href="mailto:2731277468@qq.com">2731277468@qq.com <span aria-hidden="true">↗</span></a><button className="dialog-copy" onClick={copyEmail} aria-live="polite">{copied ? '邮箱已复制 ✓' : '复制邮箱'}</button><dl className="dialog-details"><div><dt>微信号</dt><dd>ZShonz</dd></div><div><dt>合作方向</dt><dd>品牌全案 · 视觉识别 · 包装与空间</dd></div></dl><p className="dialog-hint">来信可附上项目简介、预期时间与预算，方便进一步沟通。</p></div>
     </dialog>

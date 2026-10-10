@@ -17,7 +17,7 @@ export default function ObjectGallery() {
   const choose = i => setActive((i + exhibits.length) % exhibits.length);
   const open = i => { window.location.hash = `package-${exhibits[i][0]}`; };
   useEffect(() => {
-    const node = stage.current;
+    const node = stage.current.closest('section');
     const wheel = e => {
       if (e.ctrlKey) return;
       e.preventDefault();

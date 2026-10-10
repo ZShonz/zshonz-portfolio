@@ -162,3 +162,16 @@
 }
 
 .case-hero>img{height:auto}
+
+/* Exhibition rooms fit the viewport; gestures select exhibits, not the page. */
+html.gallery-locked,html.gallery-locked body{overflow:hidden;overscroll-behavior:none}
+.gallery-locked .museum{--room-header:86px;height:100dvh;display:flex;flex-direction:column;overflow:hidden}
+.gallery-locked .museum-header{height:var(--room-header);flex:0 0 var(--room-header)}
+.gallery-locked #main{flex:1;min-height:0;overflow:hidden}
+.gallery-locked .exhibition,.gallery-locked .object-salon{height:100%;min-height:0;display:flex;flex-direction:column;box-sizing:border-box}
+.gallery-locked .object-salon{margin-block:0}
+.gallery-locked .gallery-stage,.gallery-locked .salon-stage{height:auto;min-height:0;flex:1;touch-action:none}
+.gallery-locked .exhibition-heading,.gallery-locked .exhibition-toolbar,.gallery-locked .salon-controls{flex-shrink:0}
+.gallery-locked .work-index{touch-action:pan-y;overscroll-behavior:contain}
+@media(max-width:1024px){.gallery-locked .museum{--room-header:84px}}
+@media(max-width:640px){.gallery-locked .museum{--room-header:75px}.gallery-locked .exhibit-panel{width:min(72vw,330px,65cqh)}}
