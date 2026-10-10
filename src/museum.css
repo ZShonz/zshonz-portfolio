@@ -175,3 +175,14 @@ html.gallery-locked,html.gallery-locked body{overflow:hidden;overscroll-behavior
 .gallery-locked .work-index{touch-action:pan-y;overscroll-behavior:contain}
 @media(max-width:1024px){.gallery-locked .museum{--room-header:84px}}
 @media(max-width:640px){.gallery-locked .museum{--room-header:75px}.gallery-locked .exhibit-panel{width:min(72vw,330px,65cqh)}}
+
+/* One shared copyright bar for every page that includes it. */
+.museum:has(>.site-footer){min-height:100dvh;display:flex;flex-direction:column}
+.museum:has(>.site-footer)>.museum-header{flex-shrink:0}
+.museum:has(>.site-footer)>#main{flex:1}
+.museum:has(>.site-footer) .contact-page{min-height:0}
+.site-footer{flex:0 0 72px;height:72px;margin:0 4vw;padding:0;border-top:1px solid var(--line);box-sizing:border-box}
+.footer-bottom{height:100%;padding:0;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;font-size:10px;line-height:1.5}
+.footer-bottom>span:nth-child(2){justify-self:center}
+.footer-bottom>button{justify-self:end;font-size:10px;line-height:1.5;padding:0;min-height:44px}
+@media(max-width:640px){.site-footer{margin-inline:18px}.footer-bottom{grid-template-columns:1fr auto;gap:16px}}
