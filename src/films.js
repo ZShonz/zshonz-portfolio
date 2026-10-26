@@ -18,4 +18,10 @@ export const films = [{
   description: 'AI 影像 · 01:10',
   src: 'assets/films/last-machine-sound.mp4',
   poster: 'assets/films/last-machine-sound.jpg',
+}, {
+  id: 'moon-street',
+  title: '月亮街',
+  description: 'AI 影像 · 00:15',
+  src: 'assets/films/moon-street.mp4',
+  poster: 'assets/films/moon-street.jpg',
 }];
