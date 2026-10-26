@@ -6,4 +6,16 @@ export const films = [{
   description: 'AI 影像 · 00:12',
   src: 'assets/films/popping-mushroom.mp4',
   poster: 'assets/films/popping-mushroom.jpg',
+}, {
+  id: 'cat-captain',
+  title: '猫船长登陆',
+  description: 'AI 影像 · 00:15',
+  src: 'assets/films/cat-captain.mp4',
+  poster: 'assets/films/cat-captain.jpg',
+}, {
+  id: 'last-machine-sound',
+  title: '最后一声机器响',
+  description: 'AI 影像 · 01:10',
+  src: 'assets/films/last-machine-sound.mp4',
+  poster: 'assets/films/last-machine-sound.jpg',
 }];
