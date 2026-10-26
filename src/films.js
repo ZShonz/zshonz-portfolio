@@ -30,4 +30,10 @@ export const films = [{
   description: 'AI 影像 · 00:15',
   src: 'assets/films/wind-down-the-hill.mp4',
   poster: 'assets/films/wind-down-the-hill.jpg',
+}, {
+  id: 'wilderness-bebox',
+  title: '荒野bebox',
+  description: 'AI 影像 · 00:37',
+  src: 'assets/films/wilderness-bebox.mp4',
+  poster: 'assets/films/wilderness-bebox.jpg',
 }];
