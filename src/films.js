@@ -24,4 +24,10 @@ export const films = [{
   description: 'AI 影像 · 00:15',
   src: 'assets/films/moon-street.mp4',
   poster: 'assets/films/moon-street.jpg',
+}, {
+  id: 'wind-down-the-hill',
+  title: '风从山坡下来',
+  description: 'AI 影像 · 00:15',
+  src: 'assets/films/wind-down-the-hill.mp4',
+  poster: 'assets/films/wind-down-the-hill.jpg',
 }];
